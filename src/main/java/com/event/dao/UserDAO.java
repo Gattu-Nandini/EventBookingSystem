@@ -2,18 +2,13 @@ package com.event.dao;
 
 import java.sql.*;
 import com.event.model.User;
+import com.event.util.DBConnection;
 
 public class UserDAO {
 
-    private Connection getConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/eventdb", "root", "");
-    }
-
     public User validateUser(String username, String password) {
         String sql = "SELECT * FROM users WHERE username=? AND password=?";
-        try (Connection con = getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, username);
             ps.setString(2, password);
