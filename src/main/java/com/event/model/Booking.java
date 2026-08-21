@@ -17,4 +17,4 @@ public class Booking {
 
     public String getBookedAt() { return bookedAt; }
     public void setBookedAt(String bookedAt) { this.bookedAt = bookedAt; }
-}
+} 
