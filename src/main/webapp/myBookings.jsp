@@ -1,0 +1,49 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.event.model.Booking" %>
+<%@ page import="com.event.model.Event" %>
+<%@ page import="com.event.dao.BookingDAO" %>
+<%@ page import="com.event.dao.EventDAO" %>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>My Bookings</h2>
+        <a href="eventList.jsp" class="btn btn-outline-secondary btn-sm">Back to Events</a>
+    </div>
+
+    <table class="table table-bordered bg-white">
+        <thead class="table-dark">
+            <tr>
+                <th>Event</th>
+                <th>Venue</th>
+                <th>Date</th>
+                <th>Booked At</th>
+            </tr>
+        </thead>
+        <tbody>
+        <%
+            String username = (String) session.getAttribute("username");
+            BookingDAO bookingDao = new BookingDAO();
+            EventDAO eventDao = new EventDAO();
+            List<Booking> bookings = bookingDao.getBookingsByUser(username);
+
+            for (Booking b : bookings) {
+                Event e = eventDao.getEventById(b.getEventId());
+        %>
+            <tr>
+                <td><%= e.getTitle() %></td>
+                <td><%= e.getVenue() %></td>
+                <td><%= e.getEventDate() %></td>
+                <td><%= b.getBookedAt() %></td>
+            </tr>
+        <%
+            }
+        %>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

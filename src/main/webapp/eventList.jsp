@@ -12,6 +12,7 @@
         <div>
             <span class="me-2">Welcome, <%= session.getAttribute("username") %></span>
             <a href="logout" class="btn btn-outline-danger btn-sm">Logout</a>
+            <a href="myBookings.jsp" class="btn btn-outline-primary btn-sm me-2">My Bookings</a>
         </div>
     </div>
 
