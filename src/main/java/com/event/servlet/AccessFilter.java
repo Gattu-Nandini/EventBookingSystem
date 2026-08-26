@@ -18,7 +18,8 @@ public class AccessFilter implements Filter {
         String uri = request.getRequestURI();
         String contextPath = request.getContextPath();
 
-        boolean isLoginPage = uri.endsWith("login.jsp") || uri.endsWith("/login");
+        boolean isLoginPage = uri.endsWith("login.jsp") || uri.endsWith("/login")
+                || uri.endsWith("signup.jsp") || uri.endsWith("/signup");
         boolean isAdminPage = uri.contains("adminDashboard.jsp") || uri.contains("/addEvent");
         boolean isStudentBookingPage = uri.contains("/bookEvent") || uri.contains("myBookings.jsp");
 

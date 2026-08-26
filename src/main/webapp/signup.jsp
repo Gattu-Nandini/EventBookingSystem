@@ -5,22 +5,15 @@
 <body class="bg-light">
 <div class="container" style="max-width: 400px; margin-top: 100px;">
     <div class="card p-4 shadow-sm">
-        <h3 class="mb-3 text-center">Event Booking System - Login</h3>
-        <%
-    if (request.getParameter("msg") != null) {
-%>
-    <div class="alert alert-success"><%= request.getParameter("msg") %></div>
-<%
-    }
-%>
+        <h3 class="mb-3 text-center">Student Signup</h3>
         <%
             if (request.getParameter("error") != null) {
         %>
-            <div class="alert alert-danger">Invalid username or password</div>
+            <div class="alert alert-danger"><%= request.getParameter("error") %></div>
         <%
             }
         %>
-        <form action="login" method="post">
+        <form action="signup" method="post">
             <div class="mb-3">
                 <label class="form-label">Username</label>
                 <input type="text" class="form-control" name="username" required/>
@@ -29,9 +22,9 @@
                 <label class="form-label">Password</label>
                 <input type="password" class="form-control" name="password" required/>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Login</button>
-            <a href="signup.jsp" class="btn btn-link w-100 mt-2">New student? Sign up</a>
+            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
         </form>
+        <a href="login.jsp" class="btn btn-link mt-2">Already have an account? Login</a>
     </div>
 </div>
 </body>
