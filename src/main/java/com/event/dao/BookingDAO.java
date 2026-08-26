@@ -59,4 +59,18 @@ public class BookingDAO {
         }
         return list;
     }
+    //delete the booking record:
+    public boolean deleteBooking(int eventId, String username) {
+        String sql = "DELETE FROM bookings WHERE event_id=? AND username=?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, eventId);
+            ps.setString(2, username);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("DB error: " + e.getMessage(), e);
+        }
+    }
 }

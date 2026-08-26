@@ -14,6 +14,14 @@
         <a href="eventList.jsp" class="btn btn-outline-secondary btn-sm">Back to Events</a>
     </div>
 
+    <%
+        if (request.getParameter("msg") != null) {
+    %>
+        <div class="alert alert-info"><%= request.getParameter("msg") %></div>
+    <%
+        }
+    %>
+
     <table class="table table-bordered bg-white">
         <thead class="table-dark">
             <tr>
@@ -21,6 +29,7 @@
                 <th>Venue</th>
                 <th>Date</th>
                 <th>Booked At</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +47,10 @@
                 <td><%= e.getVenue() %></td>
                 <td><%= e.getEventDate() %></td>
                 <td><%= b.getBookedAt() %></td>
+                <td>
+                    <a href="cancelBooking?eventId=<%= e.getId() %>" class="btn btn-sm btn-danger"
+                       onclick="return confirm('Cancel this booking?');">Cancel</a>
+                </td>
             </tr>
         <%
             }

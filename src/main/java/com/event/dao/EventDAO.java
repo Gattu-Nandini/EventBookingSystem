@@ -86,4 +86,16 @@ public class EventDAO {
         e.setBookedSeats(rs.getInt("booked_seats"));
         return e;
     }
+    public boolean decrementBookedSeats(int eventId) {
+        String sql = "UPDATE events SET booked_seats = booked_seats - 1 WHERE id = ? AND booked_seats > 0";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, eventId);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("DB error: " + e.getMessage(), e);
+        }
+    }
 }
