@@ -98,4 +98,17 @@ public class EventDAO {
             throw new RuntimeException("DB error: " + e.getMessage(), e);
         }
     }
+    //delete event by admin
+    public boolean deleteEvent(int eventId) {
+        String sql = "DELETE FROM events WHERE id = ?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, eventId);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("DB error: " + e.getMessage(), e);
+        }
+    }
 }

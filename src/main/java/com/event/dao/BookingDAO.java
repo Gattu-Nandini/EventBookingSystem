@@ -73,4 +73,16 @@ public class BookingDAO {
             throw new RuntimeException("DB error: " + e.getMessage(), e);
         }
     }
+    //delete event by admin
+    public void deleteBookingsByEvent(int eventId) {
+        String sql = "DELETE FROM bookings WHERE event_id = ?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, eventId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("DB error: " + e.getMessage(), e);
+        }
+    }
 }

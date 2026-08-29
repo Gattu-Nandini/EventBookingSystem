@@ -13,6 +13,13 @@
             <span class="me-2">Welcome, <%= session.getAttribute("username") %></span>
             <a href="logout" class="btn btn-outline-danger btn-sm">Logout</a>
         </div>
+        <%
+    if (request.getParameter("msg") != null) {
+%>
+    <div class="alert alert-info"><%= request.getParameter("msg") %></div>
+<%
+    }
+%>
     </div>
 
     <a href="addEvent.jsp" class="btn btn-success mb-3">+ Add New Event</a>
@@ -20,12 +27,15 @@
     <table class="table table-bordered table-hover bg-white">
         <thead class="table-dark">
             <tr>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Venue</th>
-                <th>Total Seats</th>
-                <th>Booked</th>
-                <th>Available</th>
+                <tr>
+    <th>Title</th>
+    <th>Date</th>
+    <th>Venue</th>
+    <th>Total Seats</th>
+    <th>Booked</th>
+    <th>Available</th>
+    <th>Action</th>
+</tr>
             </tr>
         </thead>
         <tbody>
@@ -35,13 +45,17 @@
             for (Event e : events) {
         %>
             <tr>
-                <td><%= e.getTitle() %></td>
-                <td><%= e.getEventDate() %></td>
-                <td><%= e.getVenue() %></td>
-                <td><%= e.getTotalSeats() %></td>
-                <td><%= e.getBookedSeats() %></td>
-                <td><%= e.getAvailableSeats() %></td>
-            </tr>
+    <td><%= e.getTitle() %></td>
+    <td><%= e.getEventDate() %></td>
+    <td><%= e.getVenue() %></td>
+    <td><%= e.getTotalSeats() %></td>
+    <td><%= e.getBookedSeats() %></td>
+    <td><%= e.getAvailableSeats() %></td>
+    <td>
+        <a href="deleteEvent?id=<%= e.getId() %>" class="btn btn-sm btn-danger"
+           onclick="return confirm('Delete this event? All bookings for it will also be removed.');">Delete</a>
+    </td>
+</tr>
         <%
             }
         %>
