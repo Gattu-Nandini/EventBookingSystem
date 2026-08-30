@@ -1,6 +1,7 @@
 package com.event.servlet;
 
 import java.io.IOException;
+import com.event.dao.WaitlistDAO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -19,6 +20,8 @@ public class DeleteEventServlet extends HttpServlet {
         EventDAO eventDao = new EventDAO();
 
         bookingDao.deleteBookingsByEvent(eventId); // clear related bookings first
+        WaitlistDAO waitlistDao = new WaitlistDAO();
+        waitlistDao.deleteWaitlistByEvent(eventId);
         eventDao.deleteEvent(eventId); // then delete the event itself
 
         response.sendRedirect("adminDashboard.jsp?msg=Event deleted");

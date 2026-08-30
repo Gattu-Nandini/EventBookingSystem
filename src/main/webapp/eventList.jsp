@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.event.model.Event" %>
 <%@ page import="com.event.dao.EventDAO" %>
+<%@ page import="com.event.dao.WaitlistDAO" %>
 <html>
 <head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -50,12 +51,20 @@
                 <td><%= e.getVenue() %></td>
                 <td><%= available %> / <%= e.getTotalSeats() %></td>
                 <td>
-                    <% if (available > 0) { %>
-                        <a href="bookEvent?id=<%= e.getId() %>" class="btn btn-sm btn-success">Book</a>
-                    <% } else { %>
-                        <span class="badge bg-secondary">Full</span>
-                    <% } %>
-                </td>
+    <% if (available > 0) { %>
+        <a href="bookEvent?id=<%= e.getId() %>" class="btn btn-sm btn-success">Book</a>
+    <% } else {
+        WaitlistDAO waitlistDao = new WaitlistDAO();
+        String username = (String) session.getAttribute("username");
+        boolean onWaitlist = waitlistDao.isUserOnWaitlist(e.getId(), username);
+        if (onWaitlist) {
+    %>
+        <span class="badge bg-warning text-dark">On Waitlist</span>
+    <% } else { %>
+        <a href="joinWaitlist?id=<%= e.getId() %>" class="btn btn-sm btn-warning">Join Waitlist</a>
+    <% }
+    } %>
+</td>
             </tr>
         <%
             }

@@ -21,7 +21,7 @@ public class AccessFilter implements Filter {
         boolean isLoginPage = uri.endsWith("login.jsp") || uri.endsWith("/login")
                 || uri.endsWith("signup.jsp") || uri.endsWith("/signup");
         boolean isAdminPage = uri.contains("adminDashboard.jsp") || uri.contains("/addEvent") || uri.contains("/deleteEvent");
-        boolean isStudentBookingPage = uri.contains("/bookEvent") || uri.contains("/cancelBooking") || uri.contains("myBookings.jsp");
+        boolean isStudentBookingPage = uri.contains("/bookEvent") || uri.contains("/cancelBooking") || uri.contains("/joinWaitlist") || uri.contains("myBookings.jsp");
 
         boolean loggedIn = (session != null && session.getAttribute("username") != null);
         String role = loggedIn ? (String) session.getAttribute("role") : null;
