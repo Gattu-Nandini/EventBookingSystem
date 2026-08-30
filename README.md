@@ -32,7 +32,6 @@ Colleges/departments usually track event registrations through Google Forms or a
 - Apache Tomcat 9
 - MySQL (via XAMPP)
 - JDBC (PreparedStatement for all queries)
-- Bootstrap 5 (CDN, no build step)
 
 ## How it's structured
 
